@@ -5,9 +5,15 @@ import json
 
 # Create your views here.
 def ViewAllPosts(request):
-    all_post = Post.objects.all()[int(request.GET.get('pageNumber', 1)):int(request.GET.get('itemPerPage', 2)) + 1]
-    return HttpResponse(all_post)
+    # Paging
+    current_page = int(request.GET.get('pageNumber', 1))
+    if current_page > 0:
+        current_page -= 1
 
+    off_set = current_page * int(request.GET.get('itemPerPage', 2))
+
+    all_post = Post.objects.all()[off_set:int(request.GET.get('itemPerPage', 2)) + off_set]
+    return HttpResponse(all_post)
 
 def ViewPost(request, id):
     try:
