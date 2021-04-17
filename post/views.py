@@ -15,6 +15,7 @@ def ViewAllPosts(request):
     all_post = Post.objects.all()[off_set:int(request.GET.get('itemPerPage', 2)) + off_set]
     return HttpResponse(all_post)
 
+
 def ViewPost(request, id):
     try:
         seletected_post = Post.objects.get(id=id)
