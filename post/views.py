@@ -16,9 +16,9 @@ def ViewAllPosts(request):
     return HttpResponse(all_post)
 
 
-def ViewPost(request, id):
+def ViewPost(request, pk):
     try:
-        seletected_post = Post.objects.get(id=id)
+        seletected_post = Post.objects.get(id=pk)
     except:
         return HttpResponse(status=404, content="Post Not Found")
 
@@ -40,10 +40,10 @@ def AddPost(request):
         return HttpResponse("create post successfully: {}".format(save_post))
 
 
-def UpdatePost(request, id):
+def UpdatePost(request, pk):
     if request.method == 'PUT':
         try:
-            selected_post = Post.objects.get(id=id)
+            selected_post = Post.objects.get(id=pk)
         except:
             return HttpResponse(status=404, content="Post Not Found")
         if selected_post:
@@ -58,10 +58,10 @@ def UpdatePost(request, id):
             return HttpResponse("create post successfully: {}".format(selected_post))
 
 
-def DeletePost(request, id):
+def DeletePost(request, pk):
     if request.method == 'DELETE':
         try:
-            selected_post = Post.objects.get(id=id)
+            selected_post = Post.objects.get(id=pk)
         except:
             return HttpResponse(status=404, content="Post Not Found")
         if selected_post:
